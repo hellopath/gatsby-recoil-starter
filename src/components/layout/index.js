@@ -31,11 +31,12 @@ const Layout = ({ children }) => {
       <Header siteTitle={data.site.siteMetadata.title} />
       <div>
         <TransitionState>
-          {({ transitionStatus }) => {
+          {({transitionStatus}) => {
+            const visibility = ['entering', 'entered'].includes(transitionStatus) ? 'visible' : 'hidden'
             return (
               <motion.div
                 initial="hidden"
-                animate="visible"
+                animate={visibility}
                 variants={variants}
                 transition={{
                   ease: "easeOut",

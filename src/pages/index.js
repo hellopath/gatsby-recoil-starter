@@ -3,7 +3,7 @@ import React from "react"
 import Layout from "components/layout"
 import Image from "components/image"
 import SEO from "components/seo"
-import TransitionLink from "gatsby-plugin-transition-link"
+import FadeLink from "components/fade-link"
 
 const IndexPage = () => (
   <Layout>
@@ -14,13 +14,7 @@ const IndexPage = () => (
     <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
       <Image />
     </div>
-    <TransitionLink
-      to={`/page-2/`}
-      exit={{ length: 0.4 }}
-      entry={{ delay: 0.4 }}
-      >
-        Go to page 2
-    </TransitionLink>
+    <FadeLink to={`/page-2/`}>Go to page 2</FadeLink>
   </Layout>
 )
 
