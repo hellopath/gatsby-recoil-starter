@@ -11,6 +11,7 @@ import { useStaticQuery, graphql } from "gatsby"
 import { TransitionState } from "gatsby-plugin-transition-link"
 import Header from "components/header"
 import { motion } from "framer-motion"
+import styles from "./index.module.scss"
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -27,34 +28,31 @@ const Layout = ({ children }) => {
     hidden: { opacity: 0, y: 10 }
   }
   return (
-    <>
+    <div className={`w-screen h-screen`}>
       <Header siteTitle={data.site.siteMetadata.title} />
-      <div>
-        <TransitionState>
-          {({transitionStatus}) => {
-            const visibility = ['entering', 'entered'].includes(transitionStatus) ? 'visible' : 'hidden'
-            return (
-              <motion.div
-                initial="hidden"
-                animate={visibility}
-                variants={variants}
-                transition={{
-                  ease: "easeOut",
-                  duration: 0.6
-                }}
-                >
-                {children}
-              </motion.div>
-            )
-          }}
-        </TransitionState>
-        <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
-        </footer>
+      <div className={`w-full h-full`}>
+        <div className={styles.parent}>
+          <TransitionState>
+            {({transitionStatus}) => {
+              const visibility = ['entering', 'entered'].includes(transitionStatus) ? 'visible' : 'hidden'
+              return (
+                <motion.div
+                  initial="hidden"
+                  animate={visibility}
+                  variants={variants}
+                  transition={{
+                    ease: "easeOut",
+                    duration: 0.6
+                  }}
+                  >
+                  {children}
+                </motion.div>
+              )
+            }}
+          </TransitionState>
+        </div>
       </div>
-    </>
+    </div>
   )
 }
 
