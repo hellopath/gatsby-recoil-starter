@@ -41,8 +41,8 @@ const Layout = ({ children }) => {
                   animate={visibility}
                   variants={variants}
                   transition={{
-                    ease: "easeOut",
-                    duration: 0.6
+                    ease: "easeInOut",
+                    duration: 0.4
                   }}
                   >
                   {children}

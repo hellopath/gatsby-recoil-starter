@@ -1,35 +1,37 @@
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
-// import { useRecoilState } from 'recoil'
+import { useRecoilState } from 'recoil'
+import { headerInputTextState } from 'atoms'
 import styles from './index.module.scss'
 
 const Header = ({ siteTitle }) => (
-  <header className={`${styles.parent} bg-purple-800`}>
-    <div>
-      <h1>
+  <header className={`${styles.parent} bg-purple-800 p-2`}>
+    <div className={`flex`}>
+      <h1 className={`flex-1`}>
         <Link to="/" className={`text-white`}>
           {siteTitle}
         </Link>
       </h1>
-      {/* <TextInput /> */}
+      <TextInput className={`flex-4`} />
     </div>
   </header>
 )
 
-// function TextInput() {
-//   const [text, setText] = useRecoilState(textState)
-//   const onChange = event => {
-//     setText(event.target.value)
-//   };
-//   return (
-//     <div>
-//       <input type="text" value={text} onChange={onChange} />
-//       <br />
-//       Echo: {text}
-//     </div>
-//   )
-// }
+function TextInput({className}) {
+  const [text, setText] = useRecoilState(headerInputTextState)
+  const onChange = event => {
+    setText(event.target.value)
+  };
+  return (
+    <input
+      type="text"
+      value={text}
+      onChange={onChange}
+      className={`${className} bg-gray-200 appearance-none border-2 border-gray-200 rounded w-1/6 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500`}
+    />
+  )
+}
 
 Header.propTypes = {
   siteTitle: PropTypes.string,
