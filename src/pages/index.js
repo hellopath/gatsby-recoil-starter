@@ -2,15 +2,19 @@ import React from "react"
 import Layout from "components/layout"
 import Image from "components/image"
 import SEO from "components/seo"
-import { useRecoilValue, useRecoilValueLoadable } from "recoil"
+import {
+  useRecoilValue,
+  // useRecoilValueLoadable
+} from "recoil"
 import {
   headerInputTextState,
-  currentUserInfoQuery
+  // currentUserInfoQuery
 } from "state"
 import FadeLink from "components/fade-link"
 
 const CurrentUser = () => {
-  const user = useRecoilValueLoadable(currentUserInfoQuery)
+  // const user = useRecoilValueLoadable(currentUserInfoQuery)
+  const user = { state: 'hasValue', contents: { name: 'PA-TH' } }
   const name = useRecoilValue(headerInputTextState)
   switch (user.state) {
     case 'hasValue':
