@@ -4,11 +4,11 @@
  * See: https://www.gatsbyjs.org/docs/browser-apis/
  */
 
-const React = require("react")
-const { RecoilRoot } = require("recoil")
-require('./src/styles/index.scss')
+import React from "react"
+import { RecoilRoot } from "recoil"
+import './src/styles/index.scss'
 
-exports.wrapRootElement = ({ element }) => {
+export const wrapRootElement = ({ element }) => {
   return (
     <RecoilRoot>
       {element}

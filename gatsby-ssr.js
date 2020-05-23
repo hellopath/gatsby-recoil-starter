@@ -4,4 +4,14 @@
  * See: https://www.gatsbyjs.org/docs/ssr-apis/
  */
 
-// You can delete this file if you're not using it
+import React from "react"
+import { RecoilRoot } from "recoil"
+import './src/styles/index.scss'
+
+export const wrapRootElement = ({ element }) => {
+  return (
+    <RecoilRoot>
+      {element}
+    </RecoilRoot>
+  )
+}
