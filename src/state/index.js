@@ -1,22 +1,25 @@
-import { atom, selector } from 'recoil'
+import { atom, selectorFamily } from 'recoil'
 
 export const headerInputTextState = atom({
   key: 'headerInputTextState',
   default: 'hellopath'
 })
 
-export const currentUserInfoQuery = selector({
+export const currentUserInfoQuery = selectorFamily({
   key: 'currentUserInfo',
-  get: async ({ get }) => {
-    const currentUser = get(headerInputTextState)
-    const url = `https://api.github.com/users/${currentUser}`
-    try {
-      const response = await fetch(url)
-      const data = await response.json()
-      return data
-    } catch (error) {
-      throw error
-    }
+  get: (userID) => async ({ get }) => {
+    // const currentUser = get(headerInputTextState)
+    const url = await `https://api.github.com/users/${userID}`
+    const response = await fetch(url)
+    const data = await response.json()
+    return data
+    // try {
+    //   const response = await fetch(url)
+    //   const data = await response.json()
+    //   return data
+    // } catch (error) {
+    //   throw error
+    // }
   }
 })
 

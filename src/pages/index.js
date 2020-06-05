@@ -4,36 +4,40 @@ import Image from "components/image"
 import SEO from "components/seo"
 import {
   useRecoilValue,
-  // useRecoilValueLoadable
+  useRecoilValueLoadable
 } from "recoil"
 import {
   headerInputTextState,
-  // currentUserInfoQuery
+  currentUserInfoQuery
 } from "state"
 import FadeLink from "components/fade-link"
 
-const CurrentUser = () => {
-  // const user = useRecoilValueLoadable(currentUserInfoQuery)
-  const user = { state: 'hasValue', contents: { name: 'PA-TH' } }
+function CurrentUser({userID}) {
+  const user = useRecoilValueLoadable(currentUserInfoQuery(userID))
+  // const user = { state: 'hasValue', contents: { name: 'PA-TH' } }
   const name = useRecoilValue(headerInputTextState)
-  switch (user.state) {
-    case 'hasValue':
-      return <span>Hi {name} with {user.contents.name}</span>
-    case 'loading':
-      return <span className={`ml-1`}>Loading...</span>
-    case 'hasError':
-      throw user.contents
-    default :
-      return <span className={`ml-1`}>Loading...</span>
-  }
+  return user.status === 'hasValue'
+    ? <div>Hi {name} with {user.contents.name}</div>
+    : <span className={`ml-1`}>Loading...</span>
+  // switch (user.state) {
+  //   case 'hasValue':
+  //     return <span>Hi {name} with {user.contents.name}</span>
+  //   case 'loading':
+  //     return <span className={`ml-1`}>Loading...</span>
+  //   case 'hasError':
+  //     throw user.contents
+  //   default :
+  //     return <span className={`ml-1`}>Loading...</span>
+  // }
 }
 
 const IndexPage = () => {
+  const name = useRecoilValue(headerInputTextState)
   return (
     <Layout>
       <SEO title="Home" />
       <h1>
-        <CurrentUser />
+        <CurrentUser userID={name} />
       </h1>
       <p>Welcome to your new Gatsby site.</p>
       <p>Now go build something great.</p>
